@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>				
+	</head>
+
+    <body>	
+		<div class="wrap">
+			<div class="wraper">
+				<div class="banner"> <p class="statyWrap">Statystyki</p>  </div>
+				<div class="bars_warp">
+					<div>
+						<p class="infoText">Nawodnienie</p>
+						<div class="bar"> <div id="waterInner"></div> </div>
+					</div>
+					<div style="margin-top: 5px;">
+						<p class="infoText">Nawóz</p>
+						<div class="bar"> <div id="manureInner"></div> </div>
+					</div>
+					<div style="margin-top: 5px;">
+						<p class="infoText">Nasłonecznienie</p>
+						<div class="bar"> <div id="sunInner"></div> </div>
+					</div>
+					<div style="margin-top: 5px;">
+						<p class="infoText">Zawartość THC</p>
+						<div class="bar"> <div id="levelInner"></div> </div>
+					</div>
+				</div>
+				<div class="buttonRow">						
+					<div class="buton" id="watering"><p>Podlej roślinkę</p></div>
+					<div class="buton" id="ferti"><p>Dosyp nawozu</p></div>
+					<div class="buton" id="endWeed"><p>Zbierz topy</p></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var currentLevel = 0
+
+		$(function () {			
+			$('body').css('display', 'block')
+         	$('html').css('display', 'block')
+			$('.wrap').fadeIn(10)
+			$('.wraper').fadeOut(10)
+
+            window.addEventListener('message', function (event) {
+                if (event.data.action == "open") {					
+					$('.wraper').fadeIn(200)
+					setTimeout(function(){ 
+						$('#waterInner').css("width",event.data.water+"%");
+						$('#manureInner').css("width",event.data.fertilizer+"%");
+						$('#sunInner').css("width",event.data.sun+"%");
+						$('#levelInner').css("width",event.data.level+"%");
+						$('.bars_warp').attr("id",event.data.plant_key);
+						currentLevel = event.data.level;
+					}, 200);  
+                }
+				
+            });
+        });  
+
+		function CloseMenu(){
+			$('#waterInner').css("width",0+"%");
+			$('#manureInner').css("width",0+"%");
+			$('#sunInner').css("width",0+"%");
+			$('#levelInner').css("width",0+"%");
+			$('.bars_warp').attr("id","");			
+			$('.wraper').fadeOut(200)
+			$.post('http://titanium-weed/NUIFocusOFF', JSON.stringify({}));
+		}
+
+		$("#watering").click(function(){
+            Watering();
+		});
+
+		$("#ferti").click(function(){
+            Ferti();
+		});
+
+		$("#endWeed").click(function(){
+            EndWeed();
+		});
+
+		function Watering(){
+			var plant_key = $('.bars_warp').attr("id");
+			CloseMenu();
+			$.post('http://titanium-weed/plant_use_water', JSON.stringify({ _plant_key: plant_key }));
+		}
+		function Ferti(){
+			var plant_key = $('.bars_warp').attr("id");
+			CloseMenu();
+			$.post('http://titanium-weed/plant_use_fertilizer', JSON.stringify({ _plant_key: plant_key }));
+		}
+		function EndWeed(){
+			var plant_key = $('.bars_warp').attr("id");
+			if (currentLevel == 100) {
+				$.post('http://titanium-weed/plant_use_scissors', JSON.stringify({ _plant_key: plant_key }));
+			} else {
+				$.post('http://titanium-weed/showMessage', JSON.stringify({msg: "Roślina nie jest gotowa do zbioru!"}));
+			}			
+			CloseMenu();
+		}
+	
+		document.onkeyup = function (data) {
+			if (data.which == 27) { 
+                CloseMenu();
+			}
+		};
+	</script>
+</html>

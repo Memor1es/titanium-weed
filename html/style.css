@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css?family=Syncopate|Unica+One');
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300,100italic,100);
+
+@font-face {
+  font-family: 'Bebas';
+  src: url('assets/BebasNeue.ttf');
+}
+
+body, html { 
+	overflow-y: hidden;
+	background-color: transparent !important;
+	display: none;
+}
+
+.wrap {    
+	font-family: 'Roboto', sans-serif;
+	height: 400px;	
+	color: white;
+	width: 220px;
+	position: absolute;
+	top: 30.5%;
+	right: 42.5%;
+	z-index:1;
+}
+
+.wraper {
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	display: block;
+	text-align: center;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 400;
+
+	box-shadow: 0 0 15px 2px #000;
+
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 100%;
+	max-height: 100%;
+}
+
+.banner {
+	height: 60px;
+	widows: 100%;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background: url('https://i.imgur.com/1nqTubI.png');	
+}
+
+.bars_warp{
+	height: 200px;
+	width: 100%;
+	padding: 0px 20px 0px 20px;
+	display: inline-block;
+}
+
+.buttonRow{
+	margin-top: 15px;
+	width: 100%;
+	padding: 0px 20px 0px 20px;
+	display: inline-block;
+}
+
+.buton{
+	height: 30px;
+	margin-top: 5px;
+	background-color: rgba(46, 46, 46, 0.2);
+	border: 0.5px solid #fff;
+	border-radius: 3px;
+	padding: 2px;
+	transition: 600ms;
+}
+
+.buton:hover{
+	transition: 600ms;
+	background-color: rgba(87, 87, 87, 0.8);
+}
+
+.bar {
+	width: 180px;
+	height: 20px;
+
+	margin-top: -7px;
+	padding: 4px;
+	background-color: rgba(0, 0, 0, 0.171);
+}
+
+.infoText {
+	text-align: center;
+	font-family: Roboto;
+	height: 16px;
+	font-size: 16px;
+	font-weight: 100;
+}
+
+.statyWrap {
+	text-align: center; font-family: 'Roboto'; font-size: 40px; font-weight: 100;
+}
+
+#waterInner {
+	transition: width 0.85s ease-in;
+	width: 0%;
+	height: 100%;
+	background-color: rgba(37, 45, 117, 0.6) !important;
+}
+
+#manureInner {
+	transition: width 0.85s ease-in;
+	width: 0%;
+	height: 100%;
+	background-color: rgba(78, 42, 9, 0.6) !important;
+}
+
+#sunInner {
+	transition: width 0.85s ease-in;
+	width: 0%;
+	height: 100%;
+	background-color: rgba(211, 157, 41, 0.6) !important;
+}
+
+#levelInner {
+	transition: width 0.85s ease-in;
+	width: 0%;
+	height: 100%;
+	background-color: rgba(116, 37, 37, 0.6) !important;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+::-webkit-scrollbar-track {
+	display: none;
+}
+
+::-webkit-scrollbar-thumb {
+	display: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	display: none;
+}
